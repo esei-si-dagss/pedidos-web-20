@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de artículos</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de artículos</h1>
+
+	<form th:action="@{/articulos}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Descripción</label>
+					<input class="col-10 form-control" th:name="descripcionArticulo" size="30" maxlength="80" />
+				</div>
+				<div class="control-group" id="localidad">
+					<label class="col-2 control-label">Familia</label>
+					<select class="col-10 form-control" th:name="idFamilia">
+						<option th:each="familia : ${familias}" th:value="${familia.id}" th:text="${familia.nombre}">Nombre familia</option>
+					</select>
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Buscar</button>
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="articulos" class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Familia</th>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Precio</th>
+				<th />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="articulo : ${articulos}">
+				<td th:text="${articulo.id}" />
+				<td>
+  				<span th:if="${articulo.familia}" th:text="${articulo.familia.nombre}"></span> 
+				<span th:unless="${articulo.familia}">-</span>
+				</td>
+				<td><a th:href="@{/articulos/__${articulo.id}__}" th:text="${articulo.nombre}"></a></td>
+				<td th:text="${articulo.descripcion}" />
+				<td th:text="${articulo.precioUnitario}" />
+				<td><a class="btn btn-primary" th:href="@{/articulos/__${articulo.id}__}">Editar</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-lg btn-block btn-primary" th:href="@{/articulos/nuevo}">Nuevo artículo</a>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de familias</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de familias</h1>
+
+	<form th:action="@{/familias}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Descripción</label>
+					<input class="col-10 form-control" th:name="descripcionFamilia" size="30" maxlength="80" />
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Buscar</button>
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Buscar todas</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="familias" class="table table-striped">
+		<thead>
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="familia : ${familias}">
+				<td th:text="${familia.id}" />
+				<td><a th:href="@{/familias/__${familia.id}__}" th:text="${familia.nombre}"></a></td>
+				<td th:text="${familia.descripcion}" />
+				<td><a class="btn btn-primary" th:href="@{/familias/__${familia.id}__}">Editar</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-lg btn-block btn-primary" th:href="@{/familias/nueva}">Nueva familia</a>
+</body>
+</html>

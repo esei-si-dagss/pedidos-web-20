@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear artículo</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear artículo' : 'Editar artículo'"></h1>
+
+	<form th:object="${articulo}" class="form-horizontal" id="articulo-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group">
+				<label class="col-2 control-label">Id</label>
+				<label class="col-10 form-control" th:text="${esNuevo} ? '-' : *{id}" />
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Descripción</label>
+				<input class="col-10 form-control" th:field="*{descripcion}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Familia</label>
+				<select class="col-10 form-control" th:field="*{familia}">
+					<option th:each="f : ${familias}" th:value="${f.id}" th:text="${f.nombre}">Nombre familia</option>
+				</select>
+				<label class="col-2 control-label">Precio</label>
+				<input class="col-10 form-control" th:field="*{precioUnitario}" size="30" maxlength="100" />
+			</div>
+			<div class="form-group">
+				<button class="btn btn-lg btn-block btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">Guardar</button>
+
+				<a class="btn btn-lg btn-block btn-secondary col-2" th:href="@{/familias/}">Cancelar</a>
+			</div>
+		</div>
+	</form>
+
+
+
+</body>
+</html>

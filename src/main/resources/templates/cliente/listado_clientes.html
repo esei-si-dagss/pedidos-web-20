@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Listado de clientes</title>
+</head>
+
+<body>
+	<h1 class="center-text">Listado de clientes</h1>
+
+	<form th:action="@{/clientes}" method="post" class="form-horizontal" id="buscar-form">
+		<div class="row">
+			<div class="col-10 form-group">
+				<div class="control-group" id="nombre">
+					<label class="col-2 control-label">Nombre</label>
+					<input class="col-10 form-control" th:name="nombreCliente" size="30" maxlength="80" />
+				</div>
+				<div class="control-group" id="localidad">
+					<label class="col-2 control-label">Localidad</label>
+					<input class="col-10 form-control" th:name="nombreLocalidad" size="30" maxlength="80" />
+				</div>
+			</div>
+
+
+			<div class="col-2 form-group">
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Buscar</button>
+				<button type="submit" class="btn btn-lg btn-block btn-primary">Buscar todos</button>
+			</div>
+		</div>
+	</form>
+
+
+	<table id="clientes" class="table table-striped">
+		<thead>
+			<tr>
+				<th>DNI</th>
+				<th>Nombre</th>
+				<th>Domicilio</th>
+				<th>Localidad</th>
+				<th>Cód. postal</th>
+				<th>Provincia</th>
+				<th>Teléfono</th>
+				<th />
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="cliente : ${clientes}">
+				<td><a th:href="@{/clientes/__${cliente.DNI}__}" th:text="${cliente.DNI}"></a></td>
+				<td th:text="${cliente.nombre}" />
+				<td th:text="${cliente.direccion.domicilio}" />
+				<td th:text="${cliente.direccion.localidad}" />
+				<td th:text="${cliente.direccion.codigoPostal}" />
+				<td th:text="${cliente.direccion.provincia}" />
+				<td th:text="${cliente.direccion.telefono}" />
+				<td><a class="btn btn-primary" th:href="@{/clientes/__${cliente.DNI}__}">Editar</a> <a
+					class="btn btn-primary" th:href="@{/clientes/__${cliente.DNI}__/eliminar}"
+				>Borrar</a></td>
+			</tr>
+		</tbody>
+	</table>
+
+	<br />
+
+	<a class="col-2 btn btn-lg btn-block btn-primary" th:href="@{/clientes/nuevo}">Nuevo cliente</a>
+</body>
+</html>

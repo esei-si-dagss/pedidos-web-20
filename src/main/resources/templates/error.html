@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" 
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Error</title>
+</head>
+<body>
+	<h1>Algo fue mal ...</h1>
+	<table class="table table-striped">
+		<tr>
+			<td>Fecha</td>
+			<td th:text="${timestamp}" />
+		</tr>
+		<tr>
+			<td>URI</td>
+			<td th:text="${path}" />
+		</tr>
+		<tr>
+			<td>Error</td>
+			<td th:text="${error}" />
+		</tr>
+		<tr>
+			<td>Status</td>
+			<td th:text="${status}" />
+		</tr>
+		<tr>
+			<td>Mensaje</td>
+			<td th:text="${message}" />
+		</tr>
+		<tr>
+			<td>Excepciones</td>
+			<td th:text="${exception}" />
+		</tr>
+		<tr>
+			<td>Traza</td>
+			<td><pre th:text="${trace}" /></td>
+		</tr>
+	</table>
+	
+	<a class="btn btn-lg btn-block btn-primary col-2" th:href="@{/}">Volver</a>
+</body>
+</html>

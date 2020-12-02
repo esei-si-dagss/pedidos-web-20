@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html th:fragment="pagina (titulo, contenido)"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title th:replace="${titulo}">Ejemplo SI</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Bootstrap -->
+<link th:href="@{/resources/css/bootstrap.min.css}" rel="stylesheet"
+	media="screen">
+</head>
+
+<body>
+	<header>
+		<th:block th:replace="fragmentos/cabecera::cabecera"/>
+	</header>
+	<hr/>
+	<main role="main" class="container pt-5">
+		<div class="container-fluid">
+			<th:block th:include="${contenido}"/>
+		</div>
+	</main>
+	
+	<th:block th:replace="fragmentos/pie::pie"/>
+
+	<script th:src="@{/resources/js/jquery.min.js}"></script>
+	<script th:src="@{/resources/js/jquery-ui.min.js}"></script>
+	<script th:src="@{/resources/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

@@ -15,7 +15,7 @@ public class ConversorFamilia implements Converter<String, Familia> {
 
 	@Override
 	public Familia convert(String arg) {
-		Long id = Long.getLong(arg);
+		Long id = Long.parseLong(arg);
 		return articuloService.buscarFamiliaPorId(id);
 	}
 

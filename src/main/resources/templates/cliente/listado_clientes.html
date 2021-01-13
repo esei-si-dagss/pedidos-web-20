@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
 
@@ -11,11 +12,11 @@
 	<form th:action="@{/clientes}" method="post" class="form-horizontal" id="buscar-form">
 		<div class="row">
 			<div class="col-10 form-group">
-				<div class="control-group" id="nombre">
+				<div class="control-group row" id="nombre">
 					<label class="col-2 control-label">Nombre</label>
 					<input class="col-10 form-control" th:name="nombreCliente" size="30" maxlength="80" />
 				</div>
-				<div class="control-group" id="localidad">
+				<div class="control-group row" id="localidad">
 					<label class="col-2 control-label">Localidad</label>
 					<input class="col-10 form-control" th:name="nombreLocalidad" size="30" maxlength="80" />
 				</div>
@@ -52,9 +53,11 @@
 				<td th:text="${cliente.direccion.codigoPostal}" />
 				<td th:text="${cliente.direccion.provincia}" />
 				<td th:text="${cliente.direccion.telefono}" />
-				<td><a class="btn btn-primary" th:href="@{/clientes/__${cliente.DNI}__}">Editar</a> <a
-					class="btn btn-primary" th:href="@{/clientes/__${cliente.DNI}__/eliminar}"
-				>Borrar</a></td>
+				<td>
+				<a class="btn btn-primary" th:href="@{/clientes/__${cliente.DNI}__}">Editar</a> 
+				<a class="btn btn-primary"
+						th:href="@{/clientes/__${cliente.DNI}__/eliminar}">Borrar</a>
+						</td>
 			</tr>
 		</tbody>
 	</table>

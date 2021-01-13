@@ -11,11 +11,11 @@
 	<form th:action="@{/articulos}" method="post" class="form-horizontal" id="buscar-form">
 		<div class="row">
 			<div class="col-10 form-group">
-				<div class="control-group" id="nombre">
+				<div class="control-group row" id="nombre">
 					<label class="col-2 control-label">Descripción</label>
 					<input class="col-10 form-control" th:name="descripcionArticulo" size="30" maxlength="80" />
 				</div>
-				<div class="control-group" id="localidad">
+				<div class="control-group row" id="familia">
 					<label class="col-2 control-label">Familia</label>
 					<select class="col-10 form-control" th:name="idFamilia">
 						<option th:each="familia : ${familias}" th:value="${familia.id}" th:text="${familia.nombre}">Nombre familia</option>

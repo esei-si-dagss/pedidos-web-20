@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html th:replace="~{fragmentos/plantilla::pagina(~{this::title}, ~{this::body})}" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Editar/crear almacén</title>
+</head>
+
+<body>
+	<h1 class="center-text" th:text="${esNuevo} ? 'Crear almacén' : 'Editar almacén'"></h1>
+
+	<form th:object="${almacen}" class="form-horizontal" id="almacen-form" method="post">
+		<div class="form-group has-feedback">
+
+			<div class="form-group row">
+				<label class="col-2 control-label">Id</label>
+				<label class="col-10 form-control" th:text="${esNuevo} ? '-' : *{id}"></label>
+				<label class="col-2 control-label">Nombre</label>
+				<input class="col-10 form-control" th:field="*{nombre}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Descripción</label>
+				<input class="col-10 form-control" th:field="*{descripcion}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Domicilio</label>
+				<input class="col-10 form-control" th:field="*{direccion.domicilio}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Localidad</label>
+				<input class="col-10 form-control" th:field="*{direccion.localidad}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Cód. Postal</label>
+				<input class="col-10 form-control" th:field="*{direccion.codigoPostal}" size="5" maxlength="5" />
+				<label class="col-2 control-label">Provincia</label>
+				<input class="col-10 form-control" th:field="*{direccion.provincia}" size="30" maxlength="100" />
+				<label class="col-2 control-label">Teléfono</label>
+				<input class="col-10 form-control" th:field="*{direccion.telefono}" size="9" maxlength="9" />
+			</div>
+
+			<div class="form-group">
+				<button class="btn btn-lg btn-block btn-primary col-2" th:text="${esNuevo} ? 'Crear' : 'Guardar'" type="submit">Guardar</button>
+
+				<a class="btn btn-lg btn-block btn-secondary col-2" th:href="@{/almacenes/}">Cancelar</a>
+			</div>
+			
+			<div th:unless="${esNuevo}">
+
+				<h2>Stock en almacen</h2>
+				<div th:unless="${#lists.isEmpty(articulosAlmacen)}">
+					<table class="table table-striped">
+						<tr>
+							<th>Artículo</th>
+							<th>Familia</th>
+							<th>Stock</th>
+							<th />
+						</tr>
+						<tr th:each="aa: ${articulosAlmacen}">
+							<td th:text="${aa.articulo.nombre}">articulo</td>
+							<td th:text="${aa.articulo.familia.nombre}">familia</td>
+							<td th:text="${aa.stock}" class="number">1</td>
+							<td>
+								<button class="btn btn-sm btn-block btn-primary" type="submit" name="eliminarArticulo" th:value="${aa.articulo.id}">Eliminar Artículo</button>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="row">
+
+					<div class="col-5 control-group row">
+						<label class="col-2 control-label">Artículo</label>
+						<select class="col-10 form-control" th:name="idArticulo">
+							<option th:each="a : ${articulos}" th:value="${a.id}" th:text="${a.nombre}">Nombre artículo</option>
+						</select>
+					</div>
+					<div class="col-5 control-group row">
+
+						<label class="col-2 control-label">Stock</label>
+						<input class="col-3 form-control" th:name="stock" size="10" maxlength="8" />
+
+					</div>
+
+					<button class="col-2 btn btn-sm btn-block btn-primary" type="submit" name="anadirArticulo">Añadir Artículo</button>
+				</div>
+			</div>
+		</div>
+
+	</form>
+
+
+
+</body>
+</html>
